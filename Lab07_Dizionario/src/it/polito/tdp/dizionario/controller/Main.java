@@ -1,5 +1,6 @@
 package it.polito.tdp.dizionario.controller;
 
+import it.polito.tdp.dizionario.model.Model;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,8 @@ public class Main extends Application {
 
 			// Set the model
 			// TODO
+			Model model=new Model();
+			controller.setModel(model);
 
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
