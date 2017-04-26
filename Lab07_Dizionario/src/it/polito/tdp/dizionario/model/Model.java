@@ -22,7 +22,8 @@ public class Model {
 		Graphs.addAllVertices(grafo, dao.getAllWordsFixedLength(numeroLettere));
 		
 		for(String parola: grafo.vertexSet()){
-			this.creaCollegamenti(parola);
+			for(String s: dao.getAllSimilarWords(parola, numeroLettere))
+				grafo.addEdge(s , parola);
 		}
 
 		/*for(DefaultEdge e: grafo.edgeSet())
@@ -31,20 +32,6 @@ public class Model {
 		return new ArrayList<String>(grafo.vertexSet());
 	}
 
-	private void creaCollegamenti(String parola) {
-	
-	     for(String stemp: grafo.vertexSet()){
-	    	 int diverse=0;
-	    	 for(int i=0;i< parola.length();i++){
-	    		 if(stemp.charAt(i)!=parola.charAt(i))
-	    			 diverse++;
-	    	 }
-	    	 if(diverse==1)
-	    		 grafo.addEdge(parola, stemp);
-	    		 
-	     }
-		
-	}
 
 	public List<String> displayNeighbours(String parolaInserita) {
 
