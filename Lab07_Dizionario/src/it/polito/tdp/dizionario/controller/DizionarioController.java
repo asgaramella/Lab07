@@ -85,7 +85,7 @@ public class DizionarioController {
     @FXML
     void doTrovaTuttiVicini(ActionEvent event) {
     	try{
-    		txtResult.appendText("Visita in Ampiezza: \n");
+    		txtResult.appendText("Visita in Ampiezza con algoritmo iterativo: \n");
     		for(String s: model.trovaTuttiVicini(inputParola.getText())){
     			txtResult.appendText(s+"\n");
     		}

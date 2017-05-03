@@ -1,6 +1,8 @@
 package it.polito.tdp.dizionario.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.jgrapht.Graphs;
@@ -55,13 +57,28 @@ public class Model {
 		return Graphs.neighborListOf(grafo, parolaInserita);
 	}
 	
-	public List<String> trovaTuttiVicini(String radice){
-		BreadthFirstIterator<String,DefaultEdge> albero= new BreadthFirstIterator<String,DefaultEdge>(grafo,radice);
-		ArrayList<String> ltemp=new ArrayList<String>();
-		while(albero.hasNext()){
-			ltemp.add(albero.next());
+	public HashSet<String> trovaTuttiVicini(String radice){
+		HashSet<String> visitati=new HashSet<String>();
+		HashSet<String> daVisitare=new HashSet<String>();
+		daVisitare.add(radice);
+		
+		while(!daVisitare.isEmpty()){
+			//con gli Hash non posso usare il metodo get, usa iterator !!
+			String nodo=daVisitare.iterator().next();
+			
+			List<String> vicini=new ArrayList<String>(this.displayNeighbours(nodo));
+			
+			daVisitare.addAll(vicini);
+			visitati.add(nodo);
+			
+			//mi leimina tutti gli elementi contenuti in una lista
+			daVisitare.removeAll(visitati);
+			
+			
+			
 		}
-		return ltemp;
+		
+		return visitati;
 	}
 
 	public String findMaxDegree() {
