@@ -57,28 +57,18 @@ public class Model {
 		return Graphs.neighborListOf(grafo, parolaInserita);
 	}
 	
-	public HashSet<String> trovaTuttiVicini(String radice){
-		HashSet<String> visitati=new HashSet<String>();
-		HashSet<String> daVisitare=new HashSet<String>();
-		daVisitare.add(radice);
-		
-		while(!daVisitare.isEmpty()){
-			//con gli Hash non posso usare il metodo get, usa iterator !!
-			String nodo=daVisitare.iterator().next();
-			
-			List<String> vicini=new ArrayList<String>(this.displayNeighbours(nodo));
-			
-			daVisitare.addAll(vicini);
-			visitati.add(nodo);
-			
-			//mi leimina tutti gli elementi contenuti in una lista
-			daVisitare.removeAll(visitati);
-			
-			
-			
-		}
-		
+	public List<String> trovaTuttiVicini(String radice){
+		List<String> visitati= new ArrayList<String>();
+		recursive(radice,visitati);
 		return visitati;
+	}
+	
+	private void recursive(String parola, List<String> visitati){
+		visitati.add(parola);
+		for(String stemp: Graphs.neighborListOf(grafo,parola)){
+			if(!visitati.contains(stemp))
+				recursive(stemp,visitati);
+			}
 	}
 
 	public String findMaxDegree() {
