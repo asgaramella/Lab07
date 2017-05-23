@@ -86,7 +86,8 @@ public class DizionarioController {
     void doTrovaTuttiVicini(ActionEvent event) {
     	try{
     		txtResult.appendText("Visita in Ampiezza: \n");
-    		for(String s: model.trovaTuttiVicini(inputParola.getText())){
+    		
+    		for(String s: model.trovaTuttiViciniAmpiezza(inputParola.getText())){
     			txtResult.appendText(s+"\n");
     		}
     		

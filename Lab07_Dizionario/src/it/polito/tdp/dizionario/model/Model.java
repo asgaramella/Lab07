@@ -8,6 +8,7 @@ import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.jgrapht.traverse.BreadthFirstIterator;
+import org.jgrapht.traverse.DepthFirstIterator;
 import org.jgrapht.traverse.GraphIterator;
 
 import it.polito.tdp.dizionario.db.WordDAO;
@@ -55,11 +56,20 @@ public class Model {
 		return Graphs.neighborListOf(grafo, parolaInserita);
 	}
 	
-	public List<String> trovaTuttiVicini(String radice){
-		BreadthFirstIterator<String,DefaultEdge> albero= new BreadthFirstIterator<String,DefaultEdge>(grafo,radice);
+	public List<String> trovaTuttiViciniAmpiezza(String radice){
+		GraphIterator<String,DefaultEdge> albero= new BreadthFirstIterator<String,DefaultEdge>(grafo,radice);
 		ArrayList<String> ltemp=new ArrayList<String>();
 		while(albero.hasNext()){
 			ltemp.add(albero.next());
+		}
+		return ltemp;
+	}
+	
+	public List<String> trovaTuttiViciniProfondita(String radice){
+		GraphIterator<String,DefaultEdge> dfi= new DepthFirstIterator<String,DefaultEdge>(grafo,radice);
+		ArrayList<String> ltemp=new ArrayList<String>();
+		while(dfi.hasNext()){
+			ltemp.add(dfi.next());
 		}
 		return ltemp;
 	}
